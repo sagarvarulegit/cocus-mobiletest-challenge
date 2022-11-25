@@ -20,7 +20,13 @@ public class BasePage {
 
     public void enterText(WebElement element, String text){
         wait.until(ExpectedConditions.visibilityOf(element));
+        element.sendKeys("");
         element.sendKeys(text);
+    }
+
+    protected void clearText(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        element.sendKeys("");
     }
 
 }

@@ -27,15 +27,11 @@ public class Hooks {
         capabilities.setCapability("deviceName", "7b38ef97");
         capabilities.setCapability("automationName", "UiAutomator2");
         capabilities.setCapability("app", apkPath);
-        capabilities.setCapability("newCommandTimeout ", "300");
+        capabilities.setCapability("newCommandTimeout ", "30000000");
         capabilities.setCapability("noReset ", "false");
 
-        AppiumDriver appiumDriver = new AppiumDriver(service, capabilities);
+        appiumDriver = new AppiumDriver(service, capabilities);
         appiumDriver.getStatus();
-
-        // appiumDriver.findElement(By.id("com.example.android.testing.notes.mock:id/fab_add_notes")).click();
-        // Thread.sleep(5000);
-        // appiumDriver.findElement(By.id("com.example.android.testing.notes.mock:id/add_note_title")).sendKeys("Test TitleappiumDriver.findElement");
     }
 
     @After
