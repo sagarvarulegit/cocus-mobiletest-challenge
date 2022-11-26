@@ -24,11 +24,14 @@ public class DashBoard extends BasePage {
         PageFactory.initElements(appiumDriver, this);
     }
 
-    public void clickAddButton(String title, String description) {
+    public void clickAddButton() {
         click(btnAddNote);
     }
 
     public boolean verifyNoteAdded(String title, String description) {
+
+        boolean btitle = listNotesTitle.stream().anyMatch(x -> x.getText().equals(title));
+        boolean bdescription = listNotesDescription.stream().anyMatch(x -> x.getText().equals(description));
         if (listNotesTitle.stream().anyMatch(x -> x.getText().equals(title)) &&
                 listNotesDescription.stream().anyMatch(x -> x.getText().equals(description))) {
             return true;
