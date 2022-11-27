@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.By;
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.intuit.karate.Runner;
 import com.intuit.karate.core.Scenario;
 import com.intuit.karate.junit5.Karate;
 import com.jayway.jsonpath.JsonPath;
@@ -39,7 +41,8 @@ public class Hooks {
     public static String scenarioTestData;
 
     @Before
-    public void beforeScenario(io.cucumber.java.Scenario scenario) throws InterruptedException, JsonParseException, JsonMappingException, IOException {
+    public void beforeScenario(io.cucumber.java.Scenario scenario)
+            throws InterruptedException, JsonParseException, JsonMappingException, IOException {
         System.out.println("Before Scenario");
         System.out.println(System.getProperty("user.dir"));
         String apkPath = System.getProperty("user.dir")
@@ -64,13 +67,15 @@ public class Hooks {
         Yaml yaml = new Yaml();
         Collection<String> tags = scenario.getSourceTagNames();
         String tagname = tags.stream().filter(x -> x.startsWith("@getDataFromAPI")).findFirst().orElse(null);
-       if (tagname != null) {
-            // RandomUserRunner randomUserRunner = new RandomUserRunner();
-            // Karate obj = randomUserRunner.testRamdomUserRunner();
+        if (tagname != null) {
+            Map<String, Object> args = new HashMap();
+            args.put("tags", "@get-user");
+            Map<String, Object> result = Runner.runFeature(getClass(),
+                    "classpath:RandomUser.feature", args, true);
 
-            TestUtils.getRandomUserDataFromAPI();
-            scenarioTestData =  Files.readString(Path.of(TestSuite.TEST_DATA_HOME + tagname.split("=")[1])); 
-                
+            // TestUtils.getRandomUserDataFromAPI();
+            scenarioTestData = Files.readString(Path.of(TestSuite.TEST_DATA_HOME + tagname.split("=")[1]));
+
         }
     }
 
