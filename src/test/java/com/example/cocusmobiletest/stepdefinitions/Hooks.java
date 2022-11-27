@@ -1,8 +1,10 @@
 package com.example.cocusmobiletest.stepdefinitions;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +14,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.yaml.snakeyaml.Yaml;
 
-import com.example.cocusmobiletest.utils.TestSuite;
+import com.example.cocusmobiletest.config.TestConfig;
 import com.example.cocusmobiletest.utils.TestUtils;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -22,43 +24,26 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 
 public class Hooks {
-    AppiumDriverLocalService service = new AppiumServiceBuilder().withArgument(() -> "--base-path", "/wd/hub")
+    static AppiumDriverLocalService service = new AppiumServiceBuilder().withArgument(() -> "--base-path", "/wd/hub")
             .usingPort(4723).build();
     public static AppiumDriver appiumDriver;
     public static String scenarioTestData;
+    public static TestConfig testConfig;
 
     @Before
     public void beforeScenario(io.cucumber.java.Scenario scenario)
             throws InterruptedException, JsonParseException, JsonMappingException, IOException {
-        System.out.println("Before Scenario");
-        System.out.println(System.getProperty("user.dir"));
-        String apkPath = System.getProperty("user.dir")
-                + "\\src\\test\\resources\\com\\example\\cocusmobiletest\\apk\\app-mock-debug.apk";
-        // if (service.isRunning()) {
-        // service.stop();
-        // }
-        service.stop();
-        service.start();
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("deviceName", "7b38ef97");
-        capabilities.setCapability("automationName", "UiAutomator2");
-        capabilities.setCapability("app", apkPath);
-        capabilities.setCapability("newCommandTimeout ", "30000000");
-        capabilities.setCapability("noReset ", "false");
-
-        appiumDriver = new AppiumDriver(service, capabilities);
-        appiumDriver.getStatus();
-
         // Test Data Setup
         Collection<String> tags = scenario.getSourceTagNames();
         String tagname = tags.stream().filter(x -> x.startsWith("@getDataFromAPI")).findFirst().orElse(null);
         if (tagname != null) {
             TestUtils.getRandomUserDataFromAPI();
-            scenarioTestData = Files.readString(Path.of(TestSuite.TEST_DATA_HOME + tagname.split("=")[1]));
+            scenarioTestData = Files.readString(Path.of(TestConfig.getInstance().getTestdatahome() + tagname.split("=")[1]));
         }
     }
 
@@ -66,7 +51,78 @@ public class Hooks {
     public void afterScenario(Scenario scenario) {
         byte[] ss = ((TakesScreenshot) appiumDriver).getScreenshotAs(OutputType.BYTES);
         scenario.attach(ss, "image/png", scenario.getName());
+    }
+
+    @BeforeAll
+    public static void setUpTests() throws IOException {
+        TestConfig.getInstance();
+        setUpAppiumDriver();
+    }
+
+    @AfterAll
+    public static void tearDownTests() {
         service.stop();
     }
 
+    private static void setUpAppiumDriver() {
+        if (service.isRunning()) {
+            service.stop();
+        }
+        String deviceName = getPlatformName();
+
+        if (deviceName.equalsIgnoreCase("android")) {
+            setAndroidCapbilites();
+        }
+        else if (deviceName.equalsIgnoreCase("ios")) {
+        }
+    }
+
+
+    public static String getDeviceName() {
+        if (System.getProperty("deviceName") != null) {
+            return System.getProperty("deviceName");
+        } else {
+            return TestConfig.getInstance().getDevicename();
+        }
+    }
+
+    public static String getPlatformName(){
+        if (System.getProperty("platformName") != null) {
+            return System.getProperty("platformName");
+        } else {
+            return TestConfig.getInstance().getPlatformName();
+        }
+    }
+
+    public static void setAndroidCapbilites(){
+        String apkPath = System.getProperty("user.dir")
+                    + TestConfig.getInstance().getApkpath();
+            service.start();
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("platformName", getPlatformName());
+            capabilities.setCapability("deviceName", getDeviceName());
+            capabilities.setCapability("automationName", "UiAutomator2");
+            capabilities.setCapability("app", apkPath);
+            capabilities.setCapability("newCommandTimeout ", "30000000");
+            capabilities.setCapability("noReset ", "false");
+
+            appiumDriver = new AppiumDriver(service, capabilities);
+            appiumDriver.getStatus();
+    }
+
+    public static void setIOSCapabilities(){
+        String appPath = System.getProperty("user.dir")
+                    + testConfig.getApkpath();
+            service.start();
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("platformName", getPlatformName());
+            capabilities.setCapability("deviceName", getDeviceName());
+            capabilities.setCapability("automationName", "XCUITest");
+            capabilities.setCapability("app", appPath);
+            capabilities.setCapability("newCommandTimeout ", "30000000");
+            capabilities.setCapability("noReset ", "false");
+
+            appiumDriver = new AppiumDriver(service, capabilities);
+            appiumDriver.getStatus();
+    }
 }

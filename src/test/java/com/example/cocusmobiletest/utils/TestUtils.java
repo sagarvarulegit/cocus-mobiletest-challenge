@@ -8,12 +8,14 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 
+import com.example.cocusmobiletest.config.TestConfig;
+
 public class TestUtils {
     public static String writeToJSONFile(String text, String filename) {
 
         try {
             FileWriter writer = new FileWriter(
-                    TestSuite.TEST_DATA_HOME + filename,
+                    TestConfig.getInstance().getTestdatahome() + filename,
                     false);
             writer.write(text);
             writer.close();
@@ -28,7 +30,7 @@ public class TestUtils {
         var client = HttpClient.newHttpClient();
 
         var request = HttpRequest.newBuilder(
-                URI.create(TestSuite.RANDOM_USER_APIURL))
+                    URI.create(TestConfig.getInstance().getRandomuserapiurl()))
                 .header("accept", "application/json")
                 .build();
                 HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
