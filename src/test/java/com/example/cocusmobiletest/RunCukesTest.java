@@ -6,6 +6,6 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(tags="@wip",plugin = {"pretty", "html:target/cucumber-html-report.html"})
+@CucumberOptions(plugin = {"pretty", "html:target/cucumber-reports/cucumber-html-report.html"})
 public class RunCukesTest {
 }
