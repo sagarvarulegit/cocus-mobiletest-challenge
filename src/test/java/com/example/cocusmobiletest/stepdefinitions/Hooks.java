@@ -1,33 +1,23 @@
 package com.example.cocusmobiletest.stepdefinitions;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.yaml.snakeyaml.Yaml;
 
-import com.example.cocusmobiletest.apitests.RandomUserRunner;
 import com.example.cocusmobiletest.utils.TestSuite;
 import com.example.cocusmobiletest.utils.TestUtils;
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intuit.karate.Runner;
-import com.intuit.karate.core.Scenario;
-import com.intuit.karate.junit5.Karate;
-import com.jayway.jsonpath.JsonPath;
-import com.jayway.jsonpath.ReadContext;
-
+import io.cucumber.java.Scenario;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
@@ -64,23 +54,18 @@ public class Hooks {
         appiumDriver.getStatus();
 
         // Test Data Setup
-        Yaml yaml = new Yaml();
         Collection<String> tags = scenario.getSourceTagNames();
         String tagname = tags.stream().filter(x -> x.startsWith("@getDataFromAPI")).findFirst().orElse(null);
         if (tagname != null) {
-            Map<String, Object> args = new HashMap();
-            args.put("tags", "@get-user");
-            Map<String, Object> result = Runner.runFeature(getClass(),
-                    "classpath:RandomUser.feature", args, true);
-
-            // TestUtils.getRandomUserDataFromAPI();
+            TestUtils.getRandomUserDataFromAPI();
             scenarioTestData = Files.readString(Path.of(TestSuite.TEST_DATA_HOME + tagname.split("=")[1]));
-
         }
     }
 
     @After
-    public void afterScenario() {
+    public void afterScenario(Scenario scenario) {
+        byte[] ss = ((TakesScreenshot) appiumDriver).getScreenshotAs(OutputType.BYTES);
+        scenario.attach(ss, "image/png", scenario.getName());
         service.stop();
     }
 
