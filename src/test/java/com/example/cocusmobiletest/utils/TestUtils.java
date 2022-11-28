@@ -7,6 +7,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import com.example.cocusmobiletest.config.TestConfig;
 
@@ -39,5 +41,15 @@ public class TestUtils {
             e.printStackTrace();
         }
 
+    }
+
+    public static String readFile(String fileName) {
+        String content = "";
+        try {
+            content = Files.readString(Paths.get(TestConfig.getInstance().getTestdatahome() + fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return content;
     }
 }

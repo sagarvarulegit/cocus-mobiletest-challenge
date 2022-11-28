@@ -1,5 +1,7 @@
 # cocus-mobiletest-challenge
 
+## Pre-requiste
+```npm i -g opencv4nodejs```
 
 ## Running Tests
 
@@ -13,3 +15,10 @@ Alternatively we can also specify configurations properties in `src\test\resourc
 
 ## Test Reports
 Test report is generate at `target/cucumber-reports/cucumber-html-report.html`. Screenshot are attached to HTML report as per its corresponding scenarios.
+
+
+## Issues
+```diff
+-  Large Text in Note is Trimmed
+-  Click on Add Image Deletes All existing notes 
+```
