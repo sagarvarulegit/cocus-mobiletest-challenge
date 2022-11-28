@@ -7,10 +7,8 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="src/test/resources/features", plugin = {"pretty", "html:target/cucumber-reports/cucumber-html-report.html"})
+@CucumberOptions(tags="@wip",features="src/test/resources/features", plugin = {"pretty", "html:target/cucumber-reports/cucumber-html-report.html"})
 public class RunCukesTest {
-    void test(){
-        System.out.println("asdddddddddddddddddd!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    }
+   
 }
     

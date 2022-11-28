@@ -107,7 +107,7 @@ public class Hooks {
             capabilities.setCapability("noReset ", "false");
 
             appiumDriver = new AppiumDriver(service, capabilities);
-            appiumDriver.getStatus();
+           
     }
 
     public static void setIOSCapabilities(){
