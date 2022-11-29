@@ -21,4 +21,10 @@ Test report is generate at `target/cucumber-reports/cucumber-html-report.html`. 
 ```diff
 -  Large Text in Note is Trimmed
 -  Click on Add Image Deletes All existing notes 
+-  Notes are not persisted after App is Restarted
+```
+
+## Enhancements
+```diff
++  Ids of Element should be same for all platforms
 ```

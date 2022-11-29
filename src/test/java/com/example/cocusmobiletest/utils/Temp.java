@@ -10,15 +10,37 @@ import com.ibm.icu.text.SimpleDateFormat;
 
 public class Temp {
     public static void main(String[] args) throws ParseException {
-        // "Tue, 02 Jan 2018 18:07:59 IST"
-        String dt = "2018-07-22T14:47:49.466Z";
-        ZonedDateTime zonedDateTime = ZonedDateTime.parse(dt);
-        System.out.println(zonedDateTime.format(DateTimeFormatter.RFC_1123_DATE_TIME));
+ // File actimg = ((TakesScreenshot)
+        // Hooks.appiumDriver).getScreenshotAs(OutputType.FILE);
+        // try {
+        // FileUtils.copyFile(actimg, new File("C:\\SagarV\\actimg.png"));
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
 
-        // String dateString = "2018-07-22T14:47:49.466Z";
-        // String pattern = "yyyy-MM-dd'T'HH:mm:ss.SZ";
-        // SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-        // Date date = sdf.parse(dateString);
-        // System.out.println(date); // Mon Mar 01 00:00:00 BOT 2010
+        // // load images to be compared:
+        // BufferedImage expectedImage =
+        // ImageComparisonUtil.readImageFromResources(TestConfig.getInstance().getTestdatahome()
+        // + "\\dashboard-expected.png");
+        // BufferedImage actualImage =
+        // ImageComparisonUtil.readImageFromResources("C:\\SagarV\\actimg.png");
+
+        // // where to save the result (leave null if you want to see the result in the
+        // UI)
+        // File resultDestination = new File("C:\\SagarV\\CHECKTHIS.png");
+
+        // // Create ImageComparison object with result destination and compare the
+        // images.
+        // ImageComparisonResult imageComparisonResult = new
+        // ImageComparison(expectedImage, actualImage, resultDestination)
+        // .compareImages();
+
+        // if
+        // (ImageComparisonState.MATCH.equals(imageComparisonResult.getImageComparisonState()))
+        // {
+        // return true;
+        // } else {
+        // return false;
+        // }
     }
 }

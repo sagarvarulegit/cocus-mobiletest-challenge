@@ -2,6 +2,7 @@ package com.example.cocusmobiletest.pageobjects;
 
 import java.time.Duration;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.appium.java_client.AppiumDriver;
@@ -24,9 +25,35 @@ public class BasePage {
         element.sendKeys(text);
     }
 
+    public void enterKeys(WebElement element, String keyString){
+        if (keyString != null && !keyString.isEmpty()) {
+           if (keyString.equalsIgnoreCase("enter")){
+                element.sendKeys("\n");
+           }
+        }
+    }
+
     protected void clearText(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
         element.sendKeys("");
+    }
+
+    protected boolean elementVisible(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(element));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected boolean waitElementNotPresent(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }
