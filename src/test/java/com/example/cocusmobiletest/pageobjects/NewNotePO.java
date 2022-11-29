@@ -6,7 +6,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.pagefactory.AndroidBy;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITBy;
 
 public class NewNotePO extends BasePage {
@@ -23,13 +24,6 @@ public class NewNotePO extends BasePage {
     @FindBy(id = "com.example.android.testing.notes.mock:id/fab_add_notes")
     public WebElement btnAddNotes;
 
-
-    //Version 8 Appium only supports accessibility id only via AppiumBy and AppiumBy cannot be used in PageFactory
-    //So we need cannot use the below approach
-    // @AndroidBy(accessibility = "More options")
-    // @iOSXCUITBy(accessibility = "More options")
-    // private WebElement btnMoreOptions;
-
     @FindBy(id="com.example.android.testing.notes.mock:id/title")
     private WebElement btnAddPicture;
 
@@ -45,7 +39,7 @@ public class NewNotePO extends BasePage {
         enterText(txtTitle, title);
     }
 
-    public void clearTitle() {
+    public void clearTitle() {  
         clearText(txtTitle);
     }
 
@@ -57,6 +51,19 @@ public class NewNotePO extends BasePage {
         enterTitle(title);
         enterNoteDescription(description);
         click(btnAddNotes);
+        
+    }
+
+    public void addNewBlankNote(){
+        enterTitle("");
+        enterBlankNoteDescription();
+        click(btnAddNotes);
+        waitElementNotPresent(txtTitle);
+        
+    }
+
+    private void enterBlankNoteDescription() {
+        enterKeys(txtNoteDescription, "ENTER");
     }
 
     public void clickAddImage() {

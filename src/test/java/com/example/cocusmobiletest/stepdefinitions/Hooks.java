@@ -19,8 +19,11 @@ import com.example.cocusmobiletest.utils.TestUtils;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.intuit.karate.Runner;
+
 import io.cucumber.java.Scenario;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.cucumber.java.After;
@@ -76,10 +79,9 @@ public class Hooks {
         else if (deviceName.equalsIgnoreCase("ios")) {
         }
     }
-
-
     public static String getDeviceName() {
         if (System.getProperty("deviceName") != null) {
+            TestConfig.getInstance().setDevicename(System.getProperty("deviceName"));
             return System.getProperty("deviceName");
         } else {
             return TestConfig.getInstance().getDevicename();
@@ -88,6 +90,7 @@ public class Hooks {
 
     public static String getPlatformName(){
         if (System.getProperty("platformName") != null) {
+            TestConfig.getInstance().setPlatformName(System.getProperty("platformName"));
             return System.getProperty("platformName");
         } else {
             return TestConfig.getInstance().getPlatformName();
@@ -106,8 +109,7 @@ public class Hooks {
             capabilities.setCapability("newCommandTimeout ", "30000000");
             capabilities.setCapability("noReset ", "false");
 
-            appiumDriver = new AppiumDriver(service, capabilities);
-           
+            appiumDriver = new AndroidDriver(service, capabilities);       
     }
 
     public static void setIOSCapabilities(){
@@ -122,7 +124,7 @@ public class Hooks {
             capabilities.setCapability("newCommandTimeout ", "30000000");
             capabilities.setCapability("noReset ", "false");
 
-            appiumDriver = new AppiumDriver(service, capabilities);
-            appiumDriver.getStatus();
+            appiumDriver = new IOSDriver(service, capabilities);
+           
     }
 }
