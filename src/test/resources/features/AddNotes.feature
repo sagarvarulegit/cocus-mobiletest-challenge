@@ -1,4 +1,3 @@
-@wip
 Feature: Add Notes
 
   @sanity 
@@ -22,7 +21,7 @@ Feature: Add Notes
 
   @getDataFromAPI=randomuser.json @sanity
   Scenario: Add Note from API
-    When I add Note with title and description
+    When I add Note with title and description using API
     Then Verify note is added successfully with title and description
 
   Scenario: Note are Persisted after Add Image

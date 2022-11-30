@@ -4,23 +4,24 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.Assert;
-import org.openqa.selenium.support.PageFactory;
 
 import com.example.cocusmobiletest.config.DriverManager;
 import com.example.cocusmobiletest.config.TestConfig;
 import com.example.cocusmobiletest.config.TestManager;
-import com.example.cocusmobiletest.pageobjects.DashBoardPO;
-import com.example.cocusmobiletest.pageobjects.NewNotePO;
+import com.example.cocusmobiletest.pojo.UserDetails;
 import com.example.cocusmobiletest.utils.TestUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
 
 public class NewNoteStepdefs {
     private String usedTitle;
@@ -71,9 +72,13 @@ public class NewNoteStepdefs {
                 testManager.getDashBoardPO().verifyNoteAdded(usedTitle, usedDescription));
     }
 
-    @When("I add Note with title and description")
-    public void I_add_Note_with_title_and_description() {
+    @When("I add Note with title and description using API")
+    public void I_add_Note_with_title_and_description_using_api() throws JsonMappingException, JsonProcessingException {
         String json = Hooks.scenarioTestData;
+
+        ObjectMapper om = new ObjectMapper();
+        UserDetails userDetails = om.readValue(json, UserDetails.class);
+        
         ReadContext ctx = JsonPath.parse(json);
         usedTitle = ctx.read("$.results[0].name.title") + " " + ctx.read("$.results[0].name.first") + " "
                 + ctx.read("$.results[0].name.last");
