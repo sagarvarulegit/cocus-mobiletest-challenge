@@ -49,7 +49,16 @@ public class BasePage {
 
     protected boolean waitElementNotPresent(WebElement element) {
         try {
-            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
+            wait.until(ExpectedConditions.stalenessOf(element));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected boolean isElementClickable(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
             return true;
         } catch (Exception e) {
             return false;

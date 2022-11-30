@@ -58,8 +58,6 @@ public class NewNotePO extends BasePage {
         enterTitle("");
         enterBlankNoteDescription();
         click(btnAddNotes);
-        waitElementNotPresent(txtTitle);
-        
     }
 
     private void enterBlankNoteDescription() {

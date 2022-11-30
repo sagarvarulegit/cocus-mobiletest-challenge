@@ -39,8 +39,6 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
@@ -99,7 +97,38 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>com.trivago.rta</groupId>
+                <artifactId>cluecumber-report-plugin</artifactId>
+                <version>2.9.4</version>
+                <executions>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>reporting</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sourceJsonReportDirectory>${project.build.directory}/cucumber-report</sourceJsonReportDirectory>
+                    <generatedHtmlReportDirectory>${project.build.directory}/generated-report</generatedHtmlReportDirectory>
+                    <customParameters>
+                        <Title>Cocus Mobile Test Automation Report</Title>
+                        <Platform>${platformName}</Platform>
+                        <Test_Code>https://github.com/sagarvarulegit/cocus-mobiletest-challenge</Test_Code>
+                        <_KeysStartingWithAnUnderscoreAreHidden>Report shows Mobile Tests Run on devices for Note Application
+                        </_KeysStartingWithAnUnderscoreAreHidden>
+                    </customParameters>
+                    <!-- <customCss>custom/custom.css</customCss> -->
+                    <customParametersDisplayMode>ALL_PAGES</customParametersDisplayMode>
+                    <customPageTitle>Notes Mobile Tests Report</customPageTitle>
+                    <expandBeforeAfterHooks>true</expandBeforeAfterHooks>
+                    <expandStepHooks>true</expandStepHooks>
+                    <expandDocStrings>true</expandDocStrings>
+                    <expandAttachments>true</expandAttachments>
+                </configuration>    
+            </plugin>
         </plugins>
     </build>
 </project>

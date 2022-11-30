@@ -2,15 +2,15 @@ package com.example.cocusmobiletest.config;
 
 import com.example.cocusmobiletest.pageobjects.DashBoardPO;
 import com.example.cocusmobiletest.pageobjects.NewNotePO;
-import com.example.cocusmobiletest.stepdefinitions.Hooks;
+
 
 public class TestManager {
     private DashBoardPO dashBoardPO;
     private NewNotePO newNotePO;
 
     public TestManager() {
-        dashBoardPO = new DashBoardPO(Hooks.appiumDriver);
-        newNotePO = new NewNotePO(Hooks.appiumDriver);
+        dashBoardPO = new DashBoardPO(DriverManager.appiumDriver);
+        newNotePO = new NewNotePO(DriverManager.appiumDriver);
     }
 
     public DashBoardPO getDashBoardPO() {
