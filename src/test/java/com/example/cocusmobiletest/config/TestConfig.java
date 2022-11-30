@@ -34,6 +34,15 @@ public class TestConfig {
     String apkpath;
     String testdatahome;
     String randomuserapiurl;
+    String shouldRunOnBrowserStack;
+
+    public String getShouldRunOnBrowserStack() {
+        return shouldRunOnBrowserStack;
+    }
+
+    public void setShouldRunOnBrowserStack(String shouldRunOnBrowserStack) {
+        this.shouldRunOnBrowserStack = shouldRunOnBrowserStack;
+    }
 
     public String getDevicename() {
         return devicename;

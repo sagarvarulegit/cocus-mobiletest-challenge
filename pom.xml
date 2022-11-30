@@ -99,6 +99,7 @@
                     <systemPropertyVariables>
                         <deviceName>${platformName}</deviceName>
                         <deviceName>${deviceName}</deviceName>
+                        <deviceName>${shouldRunOnBrowserStack}</deviceName>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

@@ -1,1 +1,66 @@
-{"results":[{"gender":"male","name":{"title":"Mr","first":"Jaxon","last":"Li"},"location":{"street":{"number":768,"name":"Karamu Road"},"city":"Porirua","state":"Waikato","country":"New Zealand","postcode":32466,"coordinates":{"latitude":"53.6944","longitude":"-162.1279"},"timezone":{"offset":"+1:00","description":"Brussels, Copenhagen, Madrid, Paris"}},"email":"jaxon.li@example.com","login":{"uuid":"87716ad3-2cb8-45f6-8c28-b46acfac8f2e","username":"blacklion770","password":"scorpio1","salt":"kVTIt9ya","md5":"5904d1a286b646f61694c9b89368a0db","sha1":"bd196e4fedf00a2beb8fcf7251a0a72e7fa22530","sha256":"08113fb885d37120cc4caa4706a13e4b51a7388e9fbaadbf3e523f57431a330a"},"dob":{"date":"1962-01-11T00:27:29.447Z","age":60},"registered":{"date":"2010-04-03T05:48:21.364Z","age":12},"phone":"(796)-759-1920","cell":"(434)-992-2262","id":{"name":"","value":null},"picture":{"large":"https://randomuser.me/api/portraits/men/65.jpg","medium":"https://randomuser.me/api/portraits/med/men/65.jpg","thumbnail":"https://randomuser.me/api/portraits/thumb/men/65.jpg"},"nat":"NZ"}],"info":{"seed":"da2d66257d9f8c2e","results":1,"page":1,"version":"1.4"}}
+{
+    "results": [
+        {
+            "gender": "male",
+            "name": {
+                "title": "Mr",
+                "first": "Oliver",
+                "last": "Selvik"
+            },
+            "location": {
+                "street": {
+                    "number": 9116,
+                    "name": "Veitvetveien"
+                },
+                "city": "L�dingen",
+                "state": "Akershus",
+                "country": "Norway",
+                "postcode": "0115",
+                "coordinates": {
+                    "latitude": "41.6838",
+                    "longitude": "-142.0330"
+                },
+                "timezone": {
+                    "offset": "+11:00",
+                    "description": "Magadan, Solomon Islands, New Caledonia"
+                }
+            },
+            "email": "oliver.selvik@example.com",
+            "login": {
+                "uuid": "bbfee708-b026-4f12-96ce-4667ab3174e6",
+                "username": "smalltiger347",
+                "password": "gold",
+                "salt": "UbkA7hig",
+                "md5": "e335aef5cf1e6d3faecc0b99674b6e7d",
+                "sha1": "cb36d6e9669f2b4dcd44e54889dcfc111b9609d1",
+                "sha256": "e50978de76f6786da0a594086594c7bc49bc318e9a9701ca97d4cfe915041719"
+            },
+            "dob": {
+                "date": "1967-11-27T00:34:47.249Z",
+                "age": 55
+            },
+            "registered": {
+                "date": "2010-09-01T16:23:22.471Z",
+                "age": 12
+            },
+            "phone": "67204284",
+            "cell": "40547470",
+            "id": {
+                "name": "FN",
+                "value": "27116725113"
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/men/47.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/men/47.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/men/47.jpg"
+            },
+            "nat": "NO"
+        }
+    ],
+    "info": {
+        "seed": "504cc84bcb038097",
+        "results": 1,
+        "page": 1,
+        "version": "1.4"
+    }
+}

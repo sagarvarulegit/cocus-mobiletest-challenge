@@ -28,3 +28,9 @@ Test report is generate at `target/cucumber-reports/cucumber-html-report.html`. 
 ```diff
 +  Ids of Element should be same for all platforms
 ```
+
+### Browserstack
+`curl -u "sagarvarule_Nv2k8l:xTzj2eNxZytnJbrx1e6C" -X POST "https://api-cloud.browserstack.com/app-automate/upload" -F "file=@C:\SagarV\Projects\COCUS-Challenge\cocus-mobiletest-challenge\cocus-mobile-test\src\test\resources\apk\app-mock-debug.apk"
+-F "custom_id=CalculatorApp"`
+
+`{"app_url":"bs://e2a2c4bfaf464c02f5ea94b604af6e44995a6ae3","custom_id":"CocusNoteAppSV","shareable_id":"sagarvarule_Nv2k8l/CocusNoteAppSV"}`
