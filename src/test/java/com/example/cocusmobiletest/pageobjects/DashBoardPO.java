@@ -47,12 +47,15 @@ public class DashBoardPO extends BasePage {
     }
 
     public boolean verifyNoteAdded(String title, String description) {
+        isElementClickable(btnAddNote);
         if (listNotesTitle.stream().anyMatch(x -> x.getText().equals(title)) &&
                 listNotesDescription.stream().anyMatch(x -> x.getText().equals(description))) {
             return true;
         }
         return false;
     }
+
+
 
     public void goToStatistics() {
         // Version 8 Appium only supports accessibility id only via AppiumBy and
@@ -79,7 +82,7 @@ public class DashBoardPO extends BasePage {
     }
 
     public boolean isAtDashboard() {
-        if (elementVisible(btnAddNote)) {
+        if (isElementClickable(btnAddNote)) {
             return true;
         } else {
             return false;
@@ -87,6 +90,7 @@ public class DashBoardPO extends BasePage {
     }
 
     public boolean isBlankNotePresent() {
+        isElementClickable(btnAddNote);
         List<WebElement> layout = listNotes.findElements(AppiumBy.className("android.widget.LinearLayout"));
         for (WebElement element : layout) {
             List<WebElement> desc = element

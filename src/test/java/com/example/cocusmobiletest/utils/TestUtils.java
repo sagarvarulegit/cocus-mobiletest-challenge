@@ -21,6 +21,7 @@ import org.junit.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import com.example.cocusmobiletest.config.DriverManager;
 import com.example.cocusmobiletest.config.TestConfig;
 import com.example.cocusmobiletest.stepdefinitions.Hooks;
 import com.github.romankh3.image.comparison.ImageComparison;
@@ -80,8 +81,8 @@ public class TestUtils {
         byte[] originalImg;
         try {
             originalImg = Files.readAllBytes(fi.toPath());
-            byte[] screenshot = Base64.encodeBase64(Hooks.appiumDriver.getScreenshotAs(OutputType.BYTES));
-        FeaturesMatchingResult result = Hooks.appiumDriver
+            byte[] screenshot = Base64.encodeBase64(DriverManager.appiumDriver.getScreenshotAs(OutputType.BYTES));
+        FeaturesMatchingResult result = DriverManager.appiumDriver
                 .matchImagesFeatures(screenshot, originalImg, new FeaturesMatchingOptions()
                         .withDetectorName(FeatureDetector.ORB)
                         .withGoodMatchesFactor(40)

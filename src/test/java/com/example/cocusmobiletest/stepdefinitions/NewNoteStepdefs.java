@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import org.junit.Assert;
 import org.openqa.selenium.support.PageFactory;
 
+import com.example.cocusmobiletest.config.DriverManager;
 import com.example.cocusmobiletest.config.TestConfig;
 import com.example.cocusmobiletest.config.TestManager;
 import com.example.cocusmobiletest.pageobjects.DashBoardPO;
@@ -29,7 +30,7 @@ public class NewNoteStepdefs {
 
     public NewNoteStepdefs(TestManager testManager) {
         this.testManager = testManager;
-        appiumDriver = Hooks.appiumDriver;
+        appiumDriver = DriverManager.appiumDriver;
     }
 
     @When("I add Note with {string} and {string}")
@@ -133,9 +134,9 @@ public class NewNoteStepdefs {
 
     @Then("Verify Blank note is note saved")
     public void Verify_Blank_note_is_note_saved() {
-        if(testManager.getDashBoardPO().isAtDashboard()){
+       
             Assert.assertFalse(testManager.getDashBoardPO().isBlankNotePresent());
-        }
+        
         
     }
 }
