@@ -1,5 +1,7 @@
 package com.example.cocusmobiletest.config;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,7 @@ public class DriverManager {
     public static AppiumDriver appiumDriver;
 
 
-    public static void setUpAppiumDriver() {
+    public static void setUpLocalAppiumDriver() {
          service = new AppiumServiceBuilder()
             .withArgument(() -> "--relaxed-security", "")
             .withArgument(() -> "--base-path", "/wd/hub")
@@ -63,6 +65,7 @@ public class DriverManager {
         capabilities.setCapability("app", apkPath);
         capabilities.setCapability("newCommandTimeout ", "30000000");
         capabilities.setCapability("noReset ", "false");
+        capabilities.setCapability("disableWindowAnimation ", "true");
 
         appiumDriver = new AndroidDriver(service, capabilities);
 
@@ -98,6 +101,28 @@ public class DriverManager {
     }
 
     public static void stopAppiumService() {
+        appiumDriver.quit();
         service.stop();
+    }
+
+    public static void setUpBrowserStack() throws MalformedURLException{
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("platformName", getPlatformName());
+        capabilities.setCapability("deviceName", "Google Pixel 3");
+        capabilities.setCapability("automationName", "UiAutomator2");
+        capabilities.setCapability("app", "bs://e2a2c4bfaf464c02f5ea94b604af6e44995a6ae3");
+        capabilities.setCapability("newCommandTimeout ", "30000000");
+        capabilities.setCapability("noReset ", "false");
+        capabilities.setCapability("project ", "SV_Test_Cocus");
+        capabilities.setCapability("build ", "SV_Test_Cocus-1");
+        capabilities.setCapability("name ", "first_run");
+        capabilities.setCapability("platformVersion", "9.0");
+        capabilities.setCapability("browserstack.debug ", "true");
+        capabilities.setCapability("disableWindowAnimation ", "true");
+
+        String username ="sagarvarule_Nv2k8l";
+        String accessKey ="xTzj2eNxZytnJbrx1e6C";
+        String servername= "hub-cloud.browserstack.com";
+        appiumDriver =new AndroidDriver(new URL("http://" + username + ":" + accessKey + "@" +servername + "/wd/hub"), capabilities);
     }
 }

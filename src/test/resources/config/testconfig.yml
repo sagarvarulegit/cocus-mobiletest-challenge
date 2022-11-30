@@ -4,3 +4,4 @@ devicename: '7b38ef97'
 apkpath: \\src\\test\\resources\\apk\\app-mock-debug.apk
 testdatahome: src/test/resources/testdata/
 randomuserapiurl: 'https://randomuser.me/api'
+shouldRunOnBrowserStack : "true"
