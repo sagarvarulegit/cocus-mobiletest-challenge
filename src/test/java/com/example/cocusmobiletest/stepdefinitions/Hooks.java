@@ -53,7 +53,7 @@ public class Hooks {
             TestUtils.getRandomUserDataFromAPI();
             scenarioTestData = Files
                     .readString(Path.of(TestConfig.getInstance().getTestdatahome() + tagname.split("=")[1]),
-                            Charset.forName("UTF-8"));
+                            Charset.forName("ISO-8859-1"));
         }
     }
 

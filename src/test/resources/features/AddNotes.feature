@@ -1,6 +1,7 @@
+@wip
 Feature: Add Notes
 
-  @sanity 
+  @sanity
   Scenario Outline: Add Small Note
     When I add Note with "<title>" and "<description>"
     Then Verify note is added successfully with title and description
@@ -9,6 +10,12 @@ Feature: Add Notes
       | title      | description                  |
       | testTitle2 | text: Some text Description2 |
       | testTitle1 | text: Some text Description2 |
+
+  @sanity @wip
+  Scenario: Note with Title only
+    When I add Note with "Some Title" and "text:"
+    Then Verify note title is "Some Title"
+    And Verify note description is blank
 
   @sanity
   Scenario Outline: Large text file as Note
@@ -29,14 +36,12 @@ Feature: Add Notes
     When I click on Add Image for new note
     Then Verify note is added successfully with title and description
 
-  
-  Scenario: Verify Number of Notes
+  Scenario: Verify Number of Notes Count
     When I add Note following notes
       | WebWorld    | Web is web of nodes |
       | Movies      | Marvel,DCU,Avatar   |
       | ThingstoBuy | Food,Clothes,House  |
     Then Verify Note count is "3"
-
 
   Scenario: Notes are saved after Restarting App
     Given I am at dashboard
@@ -47,7 +52,6 @@ Feature: Add Notes
     And I restart app
     Then Verify Note count is "3"
 
-
-  Scenario: Verify Blank Note Cannot be added (hit enter)
+  Scenario: Verify Blank Note Cannot be added
     When I add blank Note
     Then Verify Blank note is note saved

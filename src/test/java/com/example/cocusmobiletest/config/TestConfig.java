@@ -35,6 +35,15 @@ public class TestConfig {
     String testdatahome;
     String randomuserapiurl;
     String shouldRunOnBrowserStack;
+    String platformVersion;
+
+    public String getPlatformVersion() {
+        return platformVersion;
+    }
+
+    public void setPlatformVersion(String platformVersion) {
+        this.platformVersion = platformVersion;
+    }
 
     public String getShouldRunOnBrowserStack() {
         return shouldRunOnBrowserStack;

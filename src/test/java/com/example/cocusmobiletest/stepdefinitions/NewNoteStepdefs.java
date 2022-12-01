@@ -34,27 +34,14 @@ public class NewNoteStepdefs {
         appiumDriver = DriverManager.appiumDriver;
     }
 
-    @When("I add Note with {string} and {string}")
-    public void I_add_Note_with_and(String title, String description) {
-        testManager.getDashBoardPO().clickAddButton();
-        usedTitle = title;
-        String type = description.split(":")[0];
-        String value = description.split(":")[1];
-        switch (type.toLowerCase()) {
-            case "text" -> {
-                usedDescription = value.trim();
-                testManager.getNewNotePO().addNewNote(title, usedDescription);
-            }
-            case "file" -> {
-                usedDescription = TestUtils.readFile(value.trim());
-                testManager.getNewNotePO().addNewNote(title, usedDescription);
-            }
-            default -> {
-                usedDescription = description;
-                testManager.getNewNotePO().addNewNote(title, description);
-            }
-        }
+    @Then("Verify note title is {string}")
+    public void Verify_note_title_is(String s) {
+        Assert.assertTrue(testManager.getDashBoardPO().verifyTitle(s));
+    }
 
+    @Then("Verify note description is blank")
+    public void Verify_note_description_is_blank() {
+        Assert.assertTrue(testManager.getDashBoardPO().isBlankDescriptionPresent());
     }
 
     @Then("Verify note is added successfully with {string} and {string}")
@@ -63,7 +50,11 @@ public class NewNoteStepdefs {
             Assert.assertTrue("Expected Note with title and description not present",
             testManager.getDashBoardPO().verifyNoteAdded(title, description));
         }
-       
+    }
+
+    @Then("Verify note description is {string}")
+    public void Verify_note_description_is(String s) {
+        Assert.assertTrue(testManager.getDashBoardPO().verifyDescription(s));
     }
 
     @Then("Verify note is added successfully with title and description")
@@ -143,5 +134,42 @@ public class NewNoteStepdefs {
             Assert.assertFalse(testManager.getDashBoardPO().isBlankNotePresent());
         
         
+    }
+
+    @When("I add Note with {string} and {string}")
+    public void I_add_Note_with_and(String title, String description) {
+        String type;
+        String value;
+        testManager.getDashBoardPO().clickAddButton();
+        usedTitle = title;
+        String[] str = description.split(" ");
+        if(str.length > 1) {
+             type = description.split(":")[0];
+             value = description.split(":")[1];
+        }
+        else if(str.length == 1) {
+            type = description.split(":")[0];
+             value = "";
+        }
+        else {
+            type = "";
+            value = "";
+        }
+        
+        switch (type.toLowerCase()) {
+            case "text" -> {
+                usedDescription = value.trim();
+                testManager.getNewNotePO().addNewNote(title, usedDescription);
+            }
+            case "file" -> {
+                usedDescription = TestUtils.readFile(value.trim());
+                testManager.getNewNotePO().addNewNote(title, usedDescription);
+            }
+            default -> {
+                usedDescription = value;
+                testManager.getNewNotePO().addNewNote(title, value);
+            }
+        }
+
     }
 }
