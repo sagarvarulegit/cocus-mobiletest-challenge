@@ -63,26 +63,26 @@ public class DriverManager {
         capabilities.setCapability("deviceName", getDeviceName());
         capabilities.setCapability("automationName", "UiAutomator2");
         capabilities.setCapability("app", apkPath);
-        capabilities.setCapability("newCommandTimeout ", "30000000");
+        capabilities.setCapability("newCommandTimeout ", "60");
         capabilities.setCapability("noReset ", "false");
         capabilities.setCapability("disableWindowAnimation ", "true");
 
         appiumDriver = new AndroidDriver(service, capabilities);
 
-        Map<String, Object> argv1 = new HashMap<>();
-        argv1.put("command", "settings");
-        argv1.put("args", List.of("put", "global", "window_animation_scale ", "0"));
-        String result1 = appiumDriver.executeScript("mobile: shell", argv1).toString();
+        // Map<String, Object> argv1 = new HashMap<>();
+        // argv1.put("command", "settings");
+        // argv1.put("args", List.of("put", "global", "window_animation_scale ", "0"));
+        // String result1 = appiumDriver.executeScript("mobile: shell", argv1).toString();
 
-        Map<String, Object> argv2 = new HashMap<>();
-        argv2.put("command", "settings");
-        argv2.put("args", List.of("put", "global", "transition_animation_scale", "0"));
-        String result2 = appiumDriver.executeScript("mobile: shell", argv2).toString();
+        // Map<String, Object> argv2 = new HashMap<>();
+        // argv2.put("command", "settings");
+        // argv2.put("args", List.of("put", "global", "transition_animation_scale", "0"));
+        // String result2 = appiumDriver.executeScript("mobile: shell", argv2).toString();
 
-        Map<String, Object> argv3 = new HashMap<>();
-        argv3.put("command", "settings");
-        argv3.put("args", List.of("put", "global", "animator_duration_scale", "0"));
-        String result3 = appiumDriver.executeScript("mobile: shell", argv3).toString();
+        // Map<String, Object> argv3 = new HashMap<>();
+        // argv3.put("command", "settings");
+        // argv3.put("args", List.of("put", "global", "animator_duration_scale", "0"));
+        // String result3 = appiumDriver.executeScript("mobile: shell", argv3).toString();
     }
 
     public static void setIOSCapabilities() {
@@ -94,7 +94,7 @@ public class DriverManager {
         capabilities.setCapability("deviceName", getDeviceName());
         capabilities.setCapability("automationName", "XCUITest");
         capabilities.setCapability("app", appPath);
-        capabilities.setCapability("newCommandTimeout ", "30000000");
+        capabilities.setCapability("newCommandTimeout ", "60");
         capabilities.setCapability("noReset ", "false");
         appiumDriver = new IOSDriver(service, capabilities);
 
@@ -108,15 +108,15 @@ public class DriverManager {
     public static void setUpBrowserStack() throws MalformedURLException{
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName", getPlatformName());
-        capabilities.setCapability("deviceName", "Google Pixel 3");
+        capabilities.setCapability("deviceName", getDeviceName());
         capabilities.setCapability("automationName", "UiAutomator2");
-        capabilities.setCapability("app", "bs://e2a2c4bfaf464c02f5ea94b604af6e44995a6ae3");
-        capabilities.setCapability("newCommandTimeout ", "30000000");
+        capabilities.setCapability("platformVersion", getPlatformVersion());
+        capabilities.setCapability("app", "CocusNoteAppSV");
+        capabilities.setCapability("newCommandTimeout ", "60");
         capabilities.setCapability("noReset ", "false");
         capabilities.setCapability("project ", "SV_Test_Cocus");
         capabilities.setCapability("build ", "SV_Test_Cocus-1");
         capabilities.setCapability("name ", "first_run");
-        capabilities.setCapability("platformVersion", "9.0");
         capabilities.setCapability("browserstack.debug ", "true");
         capabilities.setCapability("disableWindowAnimation ", "true");
 
@@ -124,5 +124,14 @@ public class DriverManager {
         String accessKey ="xTzj2eNxZytnJbrx1e6C";
         String servername= "hub-cloud.browserstack.com";
         appiumDriver =new AndroidDriver(new URL("http://" + username + ":" + accessKey + "@" +servername + "/wd/hub"), capabilities);
+    }
+
+    private static String getPlatformVersion() {
+        if (System.getProperty("platformVersion") != null) {
+            TestConfig.getInstance().setPlatformVersion(System.getProperty("platformVersion"));
+            return System.getProperty("platformVersion");
+        } else {
+            return TestConfig.getInstance().getPlatformVersion();
+        }
     }
 }

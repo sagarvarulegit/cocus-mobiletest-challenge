@@ -97,9 +97,10 @@
                     <target>17</target>
                     <compilerArgument>-Werror</compilerArgument>
                     <systemPropertyVariables>
-                        <deviceName>${platformName}</deviceName>
+                        <platformName>${platformName}</platformName>
                         <deviceName>${deviceName}</deviceName>
-                        <deviceName>${shouldRunOnBrowserStack}</deviceName>
+                        <shouldRunOnBrowserStack>${shouldRunOnBrowserStack}</shouldRunOnBrowserStack>
+                        <platformVersion>${platformVersion}</platformVersion>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
