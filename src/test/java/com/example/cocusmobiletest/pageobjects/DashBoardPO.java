@@ -30,6 +30,12 @@ public class DashBoardPO extends BasePage {
     @FindBy(id = "com.example.android.testing.notes.mock:id/no_statistics")
     public WebElement txtNoStatistics;
 
+    @FindBy(xpath = "//android.widget.TextView[@text='Notes']")
+    public WebElement lblNotes;
+
+    @FindBy(xpath = "//android.widget.ImageButton[@content-desc='Navigate up']")
+    public WebElement hamburgerDashboard;
+
     private AppiumDriver appiumDriver;
 
     public DashBoardPO(AppiumDriver appiumDriver) {
@@ -39,13 +45,12 @@ public class DashBoardPO extends BasePage {
     }
 
     public void clickAddButton() {
-        appiumDriver.getPageSource();
         click(btnAddNote);
     }
 
     public boolean verifyNoteAdded(String title, String description) {
         isElementClickable(btnAddNote);
-        if(verifyTitle(title) && verifyDescription(description)) {
+        if (verifyTitle(title) && verifyDescription(description)) {
             return true;
         }
         return false;
@@ -69,7 +74,6 @@ public class DashBoardPO extends BasePage {
 
     public void goToStatistics() {
         // Version 8 Appium only supports accessibility id only via AppiumBy and
-        // AppiumBy cannot be used in PageFactory
         click(appiumDriver.findElement(AppiumBy.accessibilityId("Navigate up")));
         click(btnStatistic);
     }
@@ -83,11 +87,6 @@ public class DashBoardPO extends BasePage {
     }
 
     public Object getNoteCount() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return listNotesTitle.size();
     }
 
@@ -102,20 +101,7 @@ public class DashBoardPO extends BasePage {
     public boolean isBlankNotePresent() {
         isElementClickable(btnAddNote);
         List<WebElement> layout = listNotes.findElements(AppiumBy.className("android.widget.LinearLayout"));
-        for (WebElement element : layout) {
-            List<WebElement> desc = element
-                    .findElements(By.id("com.example.android.testing.notes.mock:id/note_detail_description"));
-            if (desc.size() == 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isBlankTitlePresent() {
-        isElementClickable(btnAddNote);
-        List<WebElement> layout = listNotes.findElements(AppiumBy.className("android.widget.LinearLayout"));
-        if(isBlankTitlePresent() && isBlankNotePresent()) {
+        if (isBlankTitlePresent() && isBlankDescriptionPresent()) {
             return true;
         }
         return false;
@@ -132,6 +118,43 @@ public class DashBoardPO extends BasePage {
             }
         }
         return false;
+    }
+
+    public boolean isBlankTitlePresent() {
+        isElementClickable(btnAddNote);
+        List<WebElement> layout = listNotes.findElements(AppiumBy.className("android.widget.LinearLayout"));
+        for (WebElement element : layout) {
+            List<WebElement> title = element
+                    .findElements(By.id("com.example.android.testing.notes.mock:id/note_detail_title"));
+            if (title.size() == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isAddButtonPresent() {
+        if (isElementClickable(btnAddNote)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isHamburgerClickable() {
+        if (isElementClickable(hamburgerDashboard)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isNoteLabelPresent() {
+        if (isElementVisible(lblNotes)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

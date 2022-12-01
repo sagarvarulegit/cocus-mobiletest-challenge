@@ -4,10 +4,12 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.Assert;
+import org.openqa.selenium.ScreenOrientation;
 
 import com.example.cocusmobiletest.config.DriverManager;
 import com.example.cocusmobiletest.config.TestConfig;
 import com.example.cocusmobiletest.config.TestManager;
+import com.example.cocusmobiletest.pageobjects.DashBoardPO;
 import com.example.cocusmobiletest.pojo.UserDetails;
 import com.example.cocusmobiletest.utils.TestUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,6 +39,11 @@ public class NewNoteStepdefs {
     @Then("Verify note title is {string}")
     public void Verify_note_title_is(String s) {
         Assert.assertTrue(testManager.getDashBoardPO().verifyTitle(s));
+    }
+
+    @Then("Verify note title is blank")
+    public void Verify_note_title_is_blank() {
+        Assert.assertTrue(testManager.getDashBoardPO().isBlankTitlePresent());
     }
 
     @Then("Verify note description is blank")
@@ -82,13 +89,16 @@ public class NewNoteStepdefs {
 
     @When("I click on Add Image for new note")
     public void I_click_on_Add_Image_for_new_note() {
+        testManager.getDashBoardPO().isAtDashboard();
         testManager.getDashBoardPO().clickAddButton();
+        testManager.getNewNotePO().isMoreOptionsPresent();
         testManager.getNewNotePO().clickAddImage();
     }
 
     @When("I add Note following notes")
     public void I_add_Note_following_notes(DataTable dt) {
         dt.asLists().forEach(row -> {
+            testManager.getDashBoardPO().isAtDashboard();
             testManager.getDashBoardPO().clickAddButton();
             testManager.getNewNotePO().addNewNote(row.get(0), row.get(1));
 
@@ -100,6 +110,7 @@ public class NewNoteStepdefs {
         if (testManager.getDashBoardPO().isAtDashboard()) {
             Assert.assertEquals("Note count is not as expected", Integer.parseInt(count), testManager.getDashBoardPO().getNoteCount());
         }
+        restart_app();
     }
 
     @Given("I am at dashboard")
@@ -108,12 +119,13 @@ public class NewNoteStepdefs {
     }
 
     @When("I restart app")
-    public void I_restart_app() {
+    public void restart_app() {
         if(TestConfig.getInstance().getPlatformName().equalsIgnoreCase("android")) {
             AndroidDriver androidDriver = (AndroidDriver)appiumDriver;
             String packageName = androidDriver.getCurrentPackage();
             androidDriver.terminateApp(packageName);
             androidDriver.activateApp(packageName);
+            androidDriver.rotate(ScreenOrientation.PORTRAIT);
         }
     }
 
@@ -130,10 +142,7 @@ public class NewNoteStepdefs {
 
     @Then("Verify Blank note is note saved")
     public void Verify_Blank_note_is_note_saved() {
-       
             Assert.assertFalse(testManager.getDashBoardPO().isBlankNotePresent());
-        
-        
     }
 
     @When("I add Note with {string} and {string}")

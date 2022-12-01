@@ -12,9 +12,9 @@
 |Description|Command|
 |---|---|
 |Run all Test| `mvn clean test`|
-|Run all with Tags| `mvn test -D"cucumber.filter.tags=@sanity"` |
+|Run all with Tags| `mvn clean test -D"cucumber.filter.tags=@sanity"` |
 |Run all on specfic platform| `mvn clean test -DplatformName=android` or `mvn clean test -DplatformName=iOS`|
-|Run all on BROWSER STACK Cloud| `mvn clean test -DshouldRunOnBrowserStack=true -DdeviceName=Google Pixel 3 -DplatformVersion=9.0`|
+|Run all on BROWSER STACK Cloud| `mvn clean test -DshouldRunOnBrowserStack=true -DdeviceName="Google Pixel 3" -DplatformVersion="9.0"`|
 ### List of Devices on Browserstack
 Full devices list can be found [here](https://www.browserstack.com/list-of-browsers-and-platforms/app_automate)
 
@@ -29,6 +29,7 @@ Test report is generate at `target/cucumber-reports/cucumber-html-report.html`. 
 -  Large Text in Note is Trimmed
 -  Click on Add Image Deletes All existing notes 
 -  Notes are not persisted after App is Restarted
+-  Spelling error in Statistics Screen shows label as "Statistcs"
 ```
 
 ## Enhancements
@@ -38,9 +39,6 @@ Test report is generate at `target/cucumber-reports/cucumber-html-report.html`. 
 
 ```
 
-## Browserstack
-`curl -u "sagarvarule_Nv2k8l:xTzj2eNxZytnJbrx1e6C" -X POST "https://api-cloud.browserstack.com/app-automate/upload" -F "file=@C:\SagarV\Projects\COCUS-Challenge\cocus-mobiletest-challenge\cocus-mobile-test\src\test\resources\apk\app-mock-debug.apk"
--F "custom_id=CalculatorApp"`
 
-`{"app_url":"bs://e2a2c4bfaf464c02f5ea94b604af6e44995a6ae3","custom_id":"CocusNoteAppSV","shareable_id":"sagarvarule_Nv2k8l/CocusNoteAppSV"}`
-
+## Latest Run Report
+Cloud Run on Browserstack - [Report](https://app-automate.browserstack.com/dashboard/v2/builds/916a0c4fb23b1d9c95827d12327a56496ede42d8/sessions/eda2ebede5b4f1c4a3da0ae80d76cf0c2ffae504)

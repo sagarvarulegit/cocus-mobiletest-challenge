@@ -38,10 +38,16 @@ public class BasePage {
         element.sendKeys("");
     }
 
-    protected boolean elementVisible(WebElement element) {
+    protected boolean isElementVisible(WebElement element) {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
-            return true;
+            if (element.isDisplayed()) {
+                return true;
+            }
+            else{
+                return false;
+            }
+           
         } catch (Exception e) {
             return false;
         }
@@ -63,6 +69,11 @@ public class BasePage {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    protected String getElementText(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        return element.getText();
     }
 
 }

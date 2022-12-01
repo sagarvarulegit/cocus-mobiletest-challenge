@@ -2,10 +2,6 @@ package com.example.cocusmobiletest.config;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.AppiumDriver;
@@ -69,20 +65,6 @@ public class DriverManager {
 
         appiumDriver = new AndroidDriver(service, capabilities);
 
-        // Map<String, Object> argv1 = new HashMap<>();
-        // argv1.put("command", "settings");
-        // argv1.put("args", List.of("put", "global", "window_animation_scale ", "0"));
-        // String result1 = appiumDriver.executeScript("mobile: shell", argv1).toString();
-
-        // Map<String, Object> argv2 = new HashMap<>();
-        // argv2.put("command", "settings");
-        // argv2.put("args", List.of("put", "global", "transition_animation_scale", "0"));
-        // String result2 = appiumDriver.executeScript("mobile: shell", argv2).toString();
-
-        // Map<String, Object> argv3 = new HashMap<>();
-        // argv3.put("command", "settings");
-        // argv3.put("args", List.of("put", "global", "animator_duration_scale", "0"));
-        // String result3 = appiumDriver.executeScript("mobile: shell", argv3).toString();
     }
 
     public static void setIOSCapabilities() {
