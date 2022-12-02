@@ -1,3 +1,4 @@
+@sanity @regression
 Feature: Add Notes
 
   @sanity
@@ -36,11 +37,13 @@ Feature: Add Notes
     When I add Note with title and description using API
     Then Verify note is added successfully with title and description
 
+  @sanity
   Scenario: Note are Persisted after Add Image
     When I add Note with "Title_Marco" and "text: Some text Description2"
     When I click on Add Image for new note
     Then Verify note is added successfully with title and description
 
+  @sanity
   Scenario: Verify Number of Notes Count
     When I add Note following notes
       | WebWorld    | Web is web of nodes |
@@ -48,6 +51,7 @@ Feature: Add Notes
       | ThingstoBuy | Food,Clothes,House  |
     Then Verify Note count is "3"
 
+  @sanity
   Scenario: Notes are saved after Restarting App
     Given I am at dashboard
     When I add Note following notes
@@ -57,7 +61,7 @@ Feature: Add Notes
     And I restart app
     Then Verify Note count is "3"
 
-
+  @sanity
   Scenario: Verify Blank Note Cannot be added
     When I add blank Note
     Then Verify Blank note is note saved

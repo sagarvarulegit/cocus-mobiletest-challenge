@@ -9,7 +9,6 @@ import org.openqa.selenium.ScreenOrientation;
 import com.example.cocusmobiletest.config.DriverManager;
 import com.example.cocusmobiletest.config.TestConfig;
 import com.example.cocusmobiletest.config.TestManager;
-import com.example.cocusmobiletest.pageobjects.DashBoardPO;
 import com.example.cocusmobiletest.pojo.UserDetails;
 import com.example.cocusmobiletest.utils.TestUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -127,11 +126,6 @@ public class NewNoteStepdefs {
             androidDriver.activateApp(packageName);
             androidDriver.rotate(ScreenOrientation.PORTRAIT);
         }
-    }
-
-    @Given("I compare image")
-    public void I_compare_image() {
-        TestUtils.compareImages();
     }
 
     @When("I add blank Note")
