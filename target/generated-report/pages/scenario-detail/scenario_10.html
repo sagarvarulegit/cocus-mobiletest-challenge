@@ -86,9 +86,9 @@ font-src * data: blob: 'unsafe-inline';"/>
       {
         "data": [
           0.0,
-          5.188,
-          4.889,
-          0.684
+          4.883,
+          0.0,
+          0.317
         ],
         "backgroundColor": [
           "rgba(96, 204, 121, 1.000)",
@@ -103,7 +103,7 @@ font-src * data: blob: 'unsafe-inline';"/>
         "data": [
           0.0,
           0.0,
-          0.0,
+          2.637,
           0.0
         ],
         "backgroundColor": [
@@ -154,7 +154,7 @@ font-src * data: blob: 'unsafe-inline';"/>
         {
           "ticks": {
             "min": 0,
-            "stepSize": 5.188,
+            "stepSize": 4.883,
             "display": true
           },
           "stacked": true,
@@ -257,7 +257,7 @@ font-src * data: blob: 'unsafe-inline';"/>
                         <a class="nav-link " href="pages/feature-summary.html">All Features</a>
                 </li>
             </ul>
-            <span class="text-light">2022-12-01 21:21:33</span>
+            <span class="text-light">2022-12-02 09:59:27</span>
         </div>
     </nav>
     <main role="main" class="container">
@@ -314,10 +314,11 @@ font-src * data: blob: 'unsafe-inline';"/>
         <div class="card h-100">
                 <div class="card-header">Scenario Info</div>
             <div class="card-body">
-                <li class="list-group-item">Started on:<br>2022-12-01 21:16:01</li>
-                <li class="list-group-item">Ended on:<br>2022-12-01 21:16:12</li>
-            <li class="list-group-item">Test Runtime:<br>0m 10s 762ms</li>
-            <li class="list-group-item">            </li>
+                <li class="list-group-item">Started on:<br>2022-12-02 09:56:17</li>
+                <li class="list-group-item">Ended on:<br>2022-12-02 09:56:25</li>
+            <li class="list-group-item">Test Runtime:<br>0m 07s 839ms</li>
+            <li class="list-group-item">
+                    <a href="pages/tag-scenarios/tag_sanity.html">@sanity</a>            </li>
             </div>
         </div>
     </div>
@@ -331,11 +332,11 @@ font-src * data: blob: 'unsafe-inline';"/>
 
                 </li>
                 <li class="list-group-item">
-                    2 passed     <i class="color-passed cluecumber-icon icon-passed" data-toggle="tooltip"
+                    1 passed     <i class="color-passed cluecumber-icon icon-passed" data-toggle="tooltip"
        title="passed"><span style="display:none">passed</span></i>
 
                     <br>
-                    0 failed     <i class="color-failed cluecumber-icon icon-failed" data-toggle="tooltip"
+                    1 failed     <i class="color-failed cluecumber-icon icon-failed" data-toggle="tooltip"
        title="failed"><span style="display:none">failed</span></i>
 
                     <br>
@@ -372,7 +373,7 @@ font-src * data: blob: 'unsafe-inline';"/>
                                 </span>
                             </div>
                             <div class="col-2 text-left small">
-                                0m 05s 188ms
+                                0m 04s 883ms
                             </div>
                             <div class="col-1 text-right">
     <i class="color-passed cluecumber-icon icon-passed" data-toggle="tooltip"
@@ -382,7 +383,7 @@ font-src * data: blob: 'unsafe-inline';"/>
                         </div>
 
 
-                        <div class="row row_passed table-row-passed">
+                        <div class="row row_failed table-row-failed">
                             <div class="col-9 text-left">
                                 <span class="text-left">2.</span>
                                 <span data-toggle="tooltip" title="com.example.cocusmobiletest.stepdefinitions.NewNoteStepdefs.Verify_Blank_note_is_note_saved()">
@@ -391,13 +392,25 @@ font-src * data: blob: 'unsafe-inline';"/>
                                 </span>
                             </div>
                             <div class="col-2 text-left small">
-                                0m 04s 889ms
+                                0m 02s 637ms
                             </div>
                             <div class="col-1 text-right">
-    <i class="color-passed cluecumber-icon icon-passed" data-toggle="tooltip"
-       title="passed"><span style="display:none">passed</span></i>
+    <i class="color-failed cluecumber-icon icon-failed" data-toggle="tooltip"
+       title="failed"><span style="display:none">failed</span></i>
                             </div>
 
+        <div class="row w-100 p-3 m-0 scenarioErrorMessage">
+            <div class="w-100 text-left border border-danger">
+                <pre class="text-danger small p-2">java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:86)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.junit.Assert.assertFalse(Assert.java:64)
+	at org.junit.Assert.assertFalse(Assert.java:74)
+	at com.example.cocusmobiletest.stepdefinitions.NewNoteStepdefs.Verify_Blank_note_is_note_saved(NewNoteStepdefs.java:139)
+	at &#226;&#339;&#189;.Verify Blank note is note saved(<a href='file:///C:/SagarV/Projects/COCUS-Challenge/cocus-mobiletest-challenge/cocus-mobile-test/src/test/resources/features/AddNotes.feature:66)' target='_blank'>file:///C:/SagarV/Projects/COCUS-Challenge/cocus-mobiletest-challenge/cocus-mobile-test/src/test/resources/features/AddNotes.feature:66)</a>
+</pre>
+            </div>
+        </div>
                         </div>
                 </li>
             </div>
@@ -416,7 +429,7 @@ font-src * data: blob: 'unsafe-inline';"/>
                                         <i>com.example.cocusmobiletest.stepdefinitions.Hooks.afterScenario(io.cucumber.java.Scenario)</i>
                                     </div>
                                     <div class="col-2 text-left small">
-                                        0m 00s 684ms
+                                        0m 00s 317ms
                                     </div>
                                     <div class="col-1 text-right">
     <i class="color-passed cluecumber-icon icon-passed" data-toggle="tooltip"
@@ -424,12 +437,12 @@ font-src * data: blob: 'unsafe-inline';"/>
                                     </div>
             <div class="row w-100 p-3 m-0 scenarioAttachment">
                 <div class="w-100 p-1 m-0 border-bottom small text-left">
-                    <a class="btn-link" data-toggle="collapse" href="#expandable309349909" role="button"
-                       aria-expanded="false" aria-controls="expandable309349909">Toggle</a> |
+                    <a class="btn-link" data-toggle="collapse" href="#expandable91831175" role="button"
+                       aria-expanded="false" aria-controls="expandable91831175">Toggle</a> |
                         Verify Blank Note Cannot be added (PNG attachment)
                 </div>
                 <div class="w-100 text-left m-auto">
-                    <div class="w-100 text-left m-auto collapse show" id="expandable309349909">
+                    <div class="w-100 text-left m-auto collapse show" id="expandable91831175">
                             <a class="grouped_elements" rel="images" href="attachments/attachment010.png">
                                 <img src="attachments/attachment010.png" class="embedded-image"
                                      style="max-width: 45%; border: grey solid 1px; margin: 10px;"
@@ -450,7 +463,7 @@ font-src * data: blob: 'unsafe-inline';"/>
 
 <footer class="footer navbar-dark">
     <div class="container-fluid">
-        <span><a href="https://github.com/trivago/cluecumber-report-plugin" target="_blank" class="text-white">Cluecumber Report Plugin version 2.9.4</a> - Report generated on 2022-12-01 21:21:33.</span>
+        <span><a href="https://github.com/trivago/cluecumber-report-plugin" target="_blank" class="text-white">Cluecumber Report Plugin version 2.9.4</a> - Report generated on 2022-12-02 09:59:27.</span>
     </div>
 </footer>    </body>
     </html>

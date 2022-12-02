@@ -75,7 +75,11 @@ public class TestUtils {
         return content;
     }
 
-    public static void compareImages() {
+    
+    /**
+     * Experimental method to compare images using Appium's image comparison feature.
+     */
+    private static void compareImages() {
         // read images as binary data
         File fi = new File(TestConfig.getInstance().getTestdatahome() + "\\dashboard-expected.png");
         byte[] originalImg;
@@ -128,6 +132,11 @@ public class TestUtils {
         // }
     }
 
+
+    /**
+     * Experimental method to compare images using Appium's image comparison feature.
+     */
+     
     public float compareImageSize(File fileA, File fileB) {
 
         float percentage = 0;

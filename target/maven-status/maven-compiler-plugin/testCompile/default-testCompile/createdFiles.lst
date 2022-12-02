@@ -7,7 +7,6 @@ com\example\cocusmobiletest\pageobjects\DashBoardPO.class
 com\example\cocusmobiletest\pojo\Timezone.class
 com\example\cocusmobiletest\pojo\Dob.class
 com\example\cocusmobiletest\RunCukesTest.class
-com\example\cocusmobiletest\utils\Temp.class
 com\example\cocusmobiletest\stepdefinitions\UIStepdefs.class
 com\example\cocusmobiletest\pojo\Location.class
 com\example\cocusmobiletest\pojo\Coordinates.class

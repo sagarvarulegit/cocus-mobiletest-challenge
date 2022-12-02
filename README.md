@@ -22,7 +22,7 @@
 
 |Description|Command|
 |---|---|
-|Run all Test| `mvn clean test`|
+|Run all Test| `mvn clean test` (*will pick parameters from `src\test\resources\config\testconfig.yml`*)|
 |Run all with Tags| `mvn clean test -D"cucumber.filter.tags=@sanity"` |
 |Run all on specfic platform| `mvn clean test -DplatformName=android -DdeviceName=7b38ef97` or `mvn clean test -DplatformName=iOS -DdeviceName=7b38ef97`|
 |Run all on Cloud BROWSER STACK | `mvn clean test -DshouldRunOnBrowserStack=true -DdeviceName="Google Pixel 3" -DplatformVersion="9.0"`|

@@ -100,7 +100,6 @@ public class DashBoardPO extends BasePage {
 
     public boolean isBlankNotePresent() {
         isElementClickable(btnAddNote);
-        List<WebElement> layout = listNotes.findElements(AppiumBy.className("android.widget.LinearLayout"));
         if (isBlankTitlePresent() && isBlankDescriptionPresent()) {
             return true;
         }

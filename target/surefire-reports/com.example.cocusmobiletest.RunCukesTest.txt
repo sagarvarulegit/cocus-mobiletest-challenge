@@ -1,38 +1,42 @@
 -------------------------------------------------------------------------------
 Test set: com.example.cocusmobiletest.RunCukesTest
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 4, Errors: 1, Skipped: 0, Time elapsed: 220.19 sec <<< FAILURE!
-Large text file as Note(Add Notes)  Time elapsed: 11.971 sec  <<< FAILURE!
+Tests run: 13, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 175.219 sec <<< FAILURE!
+Large text file as Note(Add Notes)  Time elapsed: 9.908 sec  <<< FAILURE!
 java.lang.AssertionError: Expected Note with title and description not present
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.assertTrue(Assert.java:41)
-	at com.example.cocusmobiletest.stepdefinitions.NewNoteStepdefs.Verify_note_is_added_successfully_with_title_and_description(NewNoteStepdefs.java:69)
+	at com.example.cocusmobiletest.stepdefinitions.NewNoteStepdefs.Verify_note_is_added_successfully_with_title_and_description(NewNoteStepdefs.java:68)
 	at ?.Verify note is added successfully with title and description(file:///C:/SagarV/Projects/COCUS-Challenge/cocus-mobiletest-challenge/cocus-mobile-test/src/test/resources/features/AddNotes.feature:28)
 
-Note are Persisted after Add Image(Add Notes)  Time elapsed: 16.693 sec  <<< FAILURE!
+Note are Persisted after Add Image(Add Notes)  Time elapsed: 14.592 sec  <<< FAILURE!
 java.lang.AssertionError: Expected Note with title and description not present
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.assertTrue(Assert.java:41)
-	at com.example.cocusmobiletest.stepdefinitions.NewNoteStepdefs.Verify_note_is_added_successfully_with_title_and_description(NewNoteStepdefs.java:69)
-	at ?.Verify note is added successfully with title and description(file:///C:/SagarV/Projects/COCUS-Challenge/cocus-mobiletest-challenge/cocus-mobile-test/src/test/resources/features/AddNotes.feature:42)
+	at com.example.cocusmobiletest.stepdefinitions.NewNoteStepdefs.Verify_note_is_added_successfully_with_title_and_description(NewNoteStepdefs.java:68)
+	at ?.Verify note is added successfully with title and description(file:///C:/SagarV/Projects/COCUS-Challenge/cocus-mobiletest-challenge/cocus-mobile-test/src/test/resources/features/AddNotes.feature:43)
 
-Notes are saved after Restarting App(Add Notes)  Time elapsed: 30.429 sec  <<< FAILURE!
+Notes are saved after Restarting App(Add Notes)  Time elapsed: 27.921 sec  <<< FAILURE!
 java.lang.AssertionError: Note count is not as expected expected:<3> but was:<0>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
 	at org.junit.Assert.assertEquals(Assert.java:118)
-	at com.example.cocusmobiletest.stepdefinitions.NewNoteStepdefs.Verify_Note_count_is(NewNoteStepdefs.java:111)
-	at ?.Verify Note count is "3"(file:///C:/SagarV/Projects/COCUS-Challenge/cocus-mobiletest-challenge/cocus-mobile-test/src/test/resources/features/AddNotes.feature:58)
+	at com.example.cocusmobiletest.stepdefinitions.NewNoteStepdefs.Verify_Note_count_is(NewNoteStepdefs.java:110)
+	at ?.Verify Note count is "3"(file:///C:/SagarV/Projects/COCUS-Challenge/cocus-mobiletest-challenge/cocus-mobile-test/src/test/resources/features/AddNotes.feature:61)
 
-Verify Statistics screen(Verify required UI elements of Note app)  Time elapsed: 8.187 sec  <<< FAILURE!
+Verify Blank Note Cannot be added(Add Notes)  Time elapsed: 7.906 sec  <<< FAILURE!
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:86)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.junit.Assert.assertFalse(Assert.java:64)
+	at org.junit.Assert.assertFalse(Assert.java:74)
+	at com.example.cocusmobiletest.stepdefinitions.NewNoteStepdefs.Verify_Blank_note_is_note_saved(NewNoteStepdefs.java:139)
+	at ?.Verify Blank note is note saved(file:///C:/SagarV/Projects/COCUS-Challenge/cocus-mobiletest-challenge/cocus-mobile-test/src/test/resources/features/AddNotes.feature:66)
+
+Verify Statistics screen(Verify required UI elements of Note app)  Time elapsed: 6.513 sec  <<< FAILURE!
 org.junit.ComparisonFailure: expected:<No statist[i]cs> but was:<No statist[]cs>
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
 	at com.example.cocusmobiletest.stepdefinitions.UIStepdefs.Verify_Statistics_screen_shows_message(UIStepdefs.java:91)
 	at ?.Verify Statistics screen shows "No statistics" message(file:///C:/SagarV/Projects/COCUS-Challenge/cocus-mobiletest-challenge/cocus-mobile-test/src/test/resources/features/UI.feature:25)
-
-com.example.cocusmobiletest.RunCukesTest  Time elapsed: 9.564 sec  <<< ERROR!
-java.lang.NullPointerException: Cannot invoke "io.appium.java_client.service.local.AppiumDriverLocalService.stop()" because "com.example.cocusmobiletest.config.DriverManager.service" is null
-	at com.example.cocusmobiletest.config.DriverManager.stopAppiumService(DriverManager.java:87)
-	at com.example.cocusmobiletest.stepdefinitions.Hooks.tearDownTests(Hooks.java:43)
 

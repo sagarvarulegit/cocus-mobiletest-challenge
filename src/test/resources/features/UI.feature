@@ -1,4 +1,4 @@
-@wip
+@sanity @regression @ui
 Feature: Verify required UI elements of Note app
 
 Background: I open Note App
