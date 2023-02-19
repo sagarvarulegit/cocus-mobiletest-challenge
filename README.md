@@ -1,4 +1,4 @@
-# cocus-mobiletest-challenge
+# demo-mobiletest
 ## Pre-requiste
 - Java 17
 - Appium 8.2.0
