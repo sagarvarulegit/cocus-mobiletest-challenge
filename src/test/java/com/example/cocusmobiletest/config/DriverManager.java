@@ -1,7 +1,16 @@
 package com.example.cocusmobiletest.config;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.Map;
+
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
+import net.minidev.json.parser.ParseException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.AppiumDriver;
@@ -87,8 +96,42 @@ public class DriverManager {
         service.stop();
     }
 
-    public static void setUpBrowserStack() throws MalformedURLException{
+    public static void setUpBrowserStack() throws MalformedURLException, FileNotFoundException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resources/config/parallel.conf.json"));
+        JSONArray envs = (JSONArray) config.get("environments");
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
+
+        Map<String, String> envCapabilities = (Map<String, String>) envs.get(0);
+        Iterator it = envCapabilities.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            capabilities.setCapability(pair.getKey().toString(), pair.getValue().toString());
+        }
+
+        Map<String, String> commonCapabilities = (Map<String, String>) config.get("capabilities");
+        it = commonCapabilities.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            if(capabilities.getCapability(pair.getKey().toString()) == null){
+                capabilities.setCapability(pair.getKey().toString(), pair.getValue().toString());
+            }
+        }
+
+        String username = System.getenv("BROWSERSTACK_USERNAME");
+        if(username == null) {
+            username = (String) config.get("username");
+        }
+        String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
+        if(accessKey == null) {
+            accessKey = (String) config.get("access_key");
+        }
+        String app = System.getenv("BROWSERSTACK_APP_ID");
+        if(app != null && !app.isEmpty()) {
+            capabilities.setCapability("app", app);
+        }
+
         capabilities.setCapability("platformName", getPlatformName());
         capabilities.setCapability("deviceName", getDeviceName());
         capabilities.setCapability("automationName", "UiAutomator2");
@@ -102,10 +145,8 @@ public class DriverManager {
         capabilities.setCapability("browserstack.debug ", "true");
         capabilities.setCapability("disableWindowAnimation ", "true");
 
-        String username ="sagarvarule_Nv2k8l";
-        String accessKey ="xTzj2eNxZytnJbrx1e6C";
-        String servername= "hub-cloud.browserstack.com";
-        appiumDriver =new AndroidDriver(new URL("http://" + username + ":" + accessKey + "@" +servername + "/wd/hub"), capabilities);
+
+        appiumDriver =new AndroidDriver(new URL("http://" + username + ":" + accessKey + "@" +config.get("server") + "/wd/hub"), capabilities);
     }
 
     private static String getPlatformVersion() {

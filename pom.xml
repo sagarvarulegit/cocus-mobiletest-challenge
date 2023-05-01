@@ -93,8 +93,8 @@
                 <version>3.2</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <source>17</source>
-                    <target>17</target>
+                    <source>11</source>
+                    <target>11</target>
                     <compilerArgument>-Werror</compilerArgument>
                     <systemPropertyVariables>
                         <platformName>${platformName}</platformName>

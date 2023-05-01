@@ -1,7 +1,7 @@
 @sanity @regression
 Feature: Add Notes
 
-  @sanity
+  @sanity @poc
   Scenario Outline: Add Small Note
     When I add Note with "<title>" and "<description>"
     Then Verify note is added successfully with title and description
@@ -65,3 +65,7 @@ Feature: Add Notes
   Scenario: Verify Blank Note Cannot be added
     When I add blank Note
     Then Verify Blank note is note saved
+
+    @compareimages
+    Scenario: Comapre 
+    Given I am at dashboard

@@ -33,6 +33,10 @@ import io.appium.java_client.imagecomparison.FeatureDetector;
 import io.appium.java_client.imagecomparison.FeaturesMatchingOptions;
 import io.appium.java_client.imagecomparison.FeaturesMatchingResult;
 import io.appium.java_client.imagecomparison.MatchingFunction;
+import io.appium.java_client.imagecomparison.SimilarityMatchingOptions;
+import io.appium.java_client.imagecomparison.SimilarityMatchingResult;
+
+import static org.junit.Assert.assertThat;
 
 public class TestUtils {
     public static String writeToJSONFile(String text, String filename) {
@@ -75,28 +79,32 @@ public class TestUtils {
         return content;
     }
 
-    
     /**
-     * Experimental method to compare images using Appium's image comparison feature.
+     * Experimental method to compare images using Appium's image comparison
+     * feature.
      */
-    private static void compareImages() {
+    public static void compareImagesUsingAppium() {
         // read images as binary data
         File fi = new File(TestConfig.getInstance().getTestdatahome() + "\\dashboard-expected.png");
         byte[] originalImg;
         try {
             originalImg = Files.readAllBytes(fi.toPath());
             byte[] screenshot = Base64.encodeBase64(DriverManager.appiumDriver.getScreenshotAs(OutputType.BYTES));
-        FeaturesMatchingResult result = DriverManager.appiumDriver
-                .matchImagesFeatures(screenshot, originalImg, new FeaturesMatchingOptions()
-                        .withDetectorName(FeatureDetector.ORB)
-                        .withGoodMatchesFactor(40)
-                        .withMatchFunc(MatchingFunction.BRUTE_FORCE_HAMMING)
-                        .withEnabledVisualization());
+            FeaturesMatchingResult result = DriverManager.appiumDriver
+                    .matchImagesFeatures(screenshot, originalImg, new FeaturesMatchingOptions()
+                            .withDetectorName(FeatureDetector.ORB)
+                            .withGoodMatchesFactor(40)
+                            .withMatchFunc(MatchingFunction.BRUTE_FORCE_HAMMING)
+                            .withEnabledVisualization());
+
+            byte[] screenshot1 = Base64.encodeBase64(DriverManager.appiumDriver.getScreenshotAs(OutputType.BYTES));
+            byte[] screenshot2 = Base64.encodeBase64(DriverManager.appiumDriver.getScreenshotAs(OutputType.BYTES));
+            SimilarityMatchingResult result1 = DriverManager.appiumDriver
+                    .getImagesSimilarity(screenshot1, screenshot2, new SimilarityMatchingOptions()
+                            .withEnabledVisualization());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        
 
         // File actimg = ((TakesScreenshot)
         // Hooks.appiumDriver).getScreenshotAs(OutputType.FILE);
@@ -132,11 +140,11 @@ public class TestUtils {
         // }
     }
 
-
     /**
-     * Experimental method to compare images using Appium's image comparison feature.
+     * Experimental method to compare images using Appium's image comparison
+     * feature.
      */
-     
+
     public float compareImageSize(File fileA, File fileB) {
 
         float percentage = 0;
@@ -169,4 +177,57 @@ public class TestUtils {
         }
         return percentage;
     }
+
+    public static void compareImageChatGPT() throws IOException {
+        BufferedImage image1 = ImageIO
+                .read(new File(TestConfig.getInstance().getTestdatahome() + "\\dashboard-expected.png"));
+        File screenshot = DriverManager.appiumDriver.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenshot, new File("C:\\SagarV\\actimg1.png"));
+
+        BufferedImage image2 = ImageIO.read(screenshot);
+
+        int width1 = image1.getWidth();
+        int height1 = image1.getHeight();
+        int width2 = image2.getWidth();
+        int height2 = image2.getHeight();
+        for (int y = 0; y < height1; y++) {
+            for (int x = 0; x < width1; x++) {
+                int rgb1 = image1.getRGB(x, y);
+                int red1 = (rgb1 >> 16) & 0xff;
+                int green1 = (rgb1 >> 8) & 0xff;
+                int blue1 = rgb1 & 0xff;
+                int gray1 = (int) (0.2989 * red1 + 0.5870 * green1 + 0.1140 * blue1);
+                image1.setRGB(x, y, (gray1 << 16) | (gray1 << 8) | gray1);
+                int rgb2 = image2.getRGB(x, y);
+                int red2 = (rgb2 >> 16) & 0xff;
+                int green2 = (rgb2 >> 8) & 0xff;
+                int blue2 = rgb2 & 0xff;
+                int gray2 = (int) (0.2989 * red2 + 0.5870 * green2 + 0.1140 * blue2);
+                image2.setRGB(x, y, (gray2 << 16) | (gray2 << 8) | gray2);
+
+                // save buffered image to file
+                File outputfile = new File("C:\\SagarV\\CHECKTHIS1.png");
+                ImageIO.write(image1, "png", outputfile);
+
+                File outputfile2 = new File("C:\\SagarV\\CHECKTHIS2.png");
+                ImageIO.write(image2, "png", outputfile2);
+            }
+        }
+
+        long totalDiff = 0;
+        for (int y = 0; y < height1; y++) {
+            for (int x = 0; x < width1; x++) {
+                int rgb1 = image1.getRGB(x, y);
+                int gray1 = rgb1 & 0xff;
+                int rgb2 = image2.getRGB(x, y);
+                int gray2 = rgb2 & 0xff;
+                totalDiff += Math.abs(gray1 - gray2);
+            }
+        }
+        double avgDiff = (double) totalDiff / (width1 * height1);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("Average difference: " + avgDiff);
+
+    }
+
 }

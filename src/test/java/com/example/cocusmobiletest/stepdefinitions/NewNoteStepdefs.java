@@ -1,5 +1,6 @@
 package com.example.cocusmobiletest.stepdefinitions;
 
+import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -113,7 +114,8 @@ public class NewNoteStepdefs {
     }
 
     @Given("I am at dashboard")
-    public void I_am_at_dashboard() {
+    public void I_am_at_dashboard() throws IOException {
+        TestUtils.compareImagesUsingAppium();
         Assert.assertTrue(testManager.getDashBoardPO().isAtDashboard());
     }
 
@@ -160,18 +162,18 @@ public class NewNoteStepdefs {
         }
         
         switch (type.toLowerCase()) {
-            case "text" -> {
+            case "text":
                 usedDescription = value.trim();
                 testManager.getNewNotePO().addNewNote(title, usedDescription);
-            }
-            case "file" -> {
+                break;
+            case "file":
                 usedDescription = TestUtils.readFile(value.trim());
                 testManager.getNewNotePO().addNewNote(title, usedDescription);
-            }
-            default -> {
+                break;
+            default:
                 usedDescription = value;
                 testManager.getNewNotePO().addNewNote(title, value);
-            }
+
         }
 
     }

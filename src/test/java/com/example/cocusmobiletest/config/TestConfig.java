@@ -1,5 +1,6 @@
 package com.example.cocusmobiletest.config;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -16,7 +17,9 @@ public class TestConfig {
 
     public static TestConfig getInstance() {
         if (testConfig == null) {
-            Path configPath = Paths.get("src\\test\\resources\\config\\testconfig.yml");
+            String separator = File.separator;
+            Path configPath = Paths.get("src" + separator + "test" + separator + "resources" + separator + "config" + separator + "testconfig.yml");
+
             Yaml yaml = new Yaml();
             InputStream in;
             try {
