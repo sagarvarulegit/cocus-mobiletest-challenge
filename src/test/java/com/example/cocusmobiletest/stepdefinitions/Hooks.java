@@ -5,6 +5,8 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
+
+import net.minidev.json.parser.ParseException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import com.example.cocusmobiletest.config.DriverManager;
@@ -24,7 +26,7 @@ public class Hooks {
     public static TestConfig testConfig;
 
     @BeforeAll
-    public static void setUpTests() throws IOException {
+    public static void setUpTests() throws IOException, ParseException {
         TestConfig.getInstance();
         if (System.getProperty("shouldRunOnBrowserStack") != null
                 && System.getProperty("shouldRunOnBrowserStack").equalsIgnoreCase("true")) {

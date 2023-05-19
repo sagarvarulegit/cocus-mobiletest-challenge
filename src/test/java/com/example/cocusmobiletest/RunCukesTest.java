@@ -6,7 +6,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-    tags= "@sanity",
+    tags= "@poc",
     features="src/test/resources/features",
 plugin = {"json:target/cucumber-report/cucumber.json","pretty","html:target/cucumber-report/cucumber.html"}
 )

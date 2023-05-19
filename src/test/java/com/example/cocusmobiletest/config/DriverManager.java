@@ -93,12 +93,14 @@ public class DriverManager {
 
     public static void stopAppiumService() {
         appiumDriver.quit();
-        service.stop();
+        if(service != null){
+            service.stop();
+        }
     }
 
     public static void setUpBrowserStack() throws MalformedURLException, FileNotFoundException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resources/config/parallel.conf.json"));
+        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resources/config/singledevice.config.json"));
         JSONArray envs = (JSONArray) config.get("environments");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -136,12 +138,12 @@ public class DriverManager {
         capabilities.setCapability("deviceName", getDeviceName());
         capabilities.setCapability("automationName", "UiAutomator2");
         capabilities.setCapability("platformVersion", getPlatformVersion());
-        capabilities.setCapability("app", "CocusNoteAppSV");
+        capabilities.setCapability("app", "bs://264256c4c10c4537fc588173c2bf241b623d8080");
         capabilities.setCapability("newCommandTimeout ", "60");
         capabilities.setCapability("noReset ", "false");
         capabilities.setCapability("project ", "SV_Test_Cocus");
-        capabilities.setCapability("build ", "SV_Test_Cocus-1");
-        capabilities.setCapability("name ", "first_run");
+        capabilities.setCapability("build ", "browserstack-buildno-3");
+        capabilities.setCapability("name ", "first_run_3");
         capabilities.setCapability("browserstack.debug ", "true");
         capabilities.setCapability("disableWindowAnimation ", "true");
 

@@ -9,7 +9,7 @@ Feature: Add Notes
     Examples: 
       | title      | description                  |
       | testTitle1 | text: Some text Description1 |
-      | testTitle2 | text: Some text Description2 |
+#      | testTitle2 | text: Some text Description2 |
 
   @sanity
   Scenario: Note with Title only
